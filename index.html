@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pusat Anti-Mager Nugas Mutia 🎀⚡ | Dari Rifqi</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#FFD1DC',
+                        pastelPinkDark: '#FFB7C5',
+                        pastelYellow: '#FFE599',
+                        pastelMint: '#C1E7E3',
+                        pastelPurple: '#E8DFF5',
+                        pastelOrange: '#FFD8B1',
+                        cuteRose: '#FF5E7E',
+                        cutePurple: '#8B5CF6',
+                        capyBrown: '#B07D62'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        nunito: ['Nunito', 'sans-serif']
+                    },
+                    keyframes: {
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(-6%)' },
+                            '50%': { transform: 'translateY(0)' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-4deg)' },
+                            '50%': { transform: 'rotate(4deg)' }
+                        },
+                        pulseHeart: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.18)' }
+                        },
+                        stampPop: {
+                            '0%': { transform: 'scale(3) rotate(-15deg)', opacity: '0' },
+                            '50%': { transform: 'scale(0.9) rotate(-10deg)', opacity: '1' },
+                            '100%': { transform: 'scale(1) rotate(-12deg)', opacity: '1' }
+                        }
+                    },
+                    animation: {
+                        'bounce-gentle': 'bounceGentle 2.2s infinite ease-in-out',
+                        'wiggle': 'wiggle 0.8s infinite ease-in-out',
+                        'pulse-heart': 'pulseHeart 1.2s infinite ease-in-out',
+                        'stamp': 'stampPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFF3D6 35%, #E8DFF5 70%, #D4F0F0 100%);
+            font-family: 'Nunito', sans-serif;
+            color: #382A29;
+            min-height: 100vh;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .font-fredoka { font-family: 'Fredoka', sans-serif; }
+
+        .glass-cute {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 3px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 30px rgba(255, 94, 126, 0.12);
+        }
+
+        .glass-card-hover {
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 18px 36px rgba(255, 94, 126, 0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FFF0F5; }
+        ::-webkit-scrollbar-thumb { background: #FFB7C5; border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF5E7E; }
+
+        /* Runaway Button Smooth Position */
+        #runawayBtn {
+            transition: all 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+        }
+
+        /* Custom Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus { outline: none; }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 14px;
+            cursor: pointer;
+            background: #FFE599;
+            border-radius: 99px;
+            border: 2px solid #E6C200;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #FF5E7E;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -10px;
+            box-shadow: 0 4px 10px rgba(255, 94, 126, 0.4);
+            border: 3px solid #FFFFFF;
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .pop-in {
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="relative selection:bg-pastelPink selection:text-cuteRose pb-16">
+
+    <!-- Background Particle Canvas -->
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 px-4 py-3 backdrop-blur-md bg-white/75 border-b-2 border-white/80 shadow-sm">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl animate-bounce-gentle">🦫</span>
+                <div>
+                    <h1 class="font-fredoka font-bold text-cuteRose text-sm sm:text-base leading-tight">
+                        Pusat Anti-Mager Mutia 🎀
+                    </h1>
+                    <p class="text-[10px] sm:text-xs text-gray-500 font-bold">Layanan Dosis Tawa & Semangat 24/7</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="soundToggleBtn" onclick="toggleAudioMute()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pastelPink/70 hover:bg-pastelPink border border-pastelPinkDark text-cuteRose text-xs font-bold transition-all shadow-sm active:scale-95">
+                    <i id="soundIcon" class="fa-solid fa-volume-high"></i>
+                    <span id="soundLabel" class="hidden sm:inline">Efek Suara ON</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-3xl mx-auto px-4 pt-6 space-y-8">
+
+        <!-- 1. HERO SECTION WITH CAPYBARA MASCOT -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden">
+            <span class="absolute top-4 left-4 text-2xl animate-pulse">✨</span>
+            <span class="absolute top-5 right-6 text-2xl animate-bounce-gentle">🍊</span>
+            <span class="absolute bottom-4 left-6 text-xl animate-bounce-gentle">🌸</span>
+            <span class="absolute bottom-5 right-8 text-2xl animate-pulse">💖</span>
+
+            <div class="space-y-4">
+                <!-- Interactive Capybara Mascot -->
+                <div class="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto cursor-pointer group" onclick="tapCapybara()" title="Klik Capybaranya buat dengerin dia bersuara! 🦫">
+                    <div id="capyBubble" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-white px-3 py-1.5 rounded-2xl border-2 border-cuteRose text-xs font-bold text-cuteRose shadow-lg opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap z-20">
+                        Capybara Santuy bilang: "Mutia Semangat!" 🦫🍊
+                    </div>
+                    
+                    <svg id="capySVG" class="w-full h-full filter drop-shadow-md transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 200">
+                        <!-- Ears -->
+                        <ellipse cx="60" cy="70" rx="12" ry="16" fill="#8C5A3C" stroke="#382A29" stroke-width="5"/>
+                        <ellipse cx="140" cy="70" rx="12" ry="16" fill="#8C5A3C" stroke="#382A29" stroke-width="5"/>
+                        <!-- Body/Head Capybara -->
+                        <path d="M 50 110 C 40 70, 160 70, 150 110 C 155 160, 45 160, 50 110 Z" fill="#B07D62" stroke="#382A29" stroke-width="6"/>
+                        <!-- Snout -->
+                        <path d="M 70 110 C 70 95, 130 95, 130 110 C 130 135, 70 135, 70 110 Z" fill="#966147" stroke="#382A29" stroke-width="5"/>
+                        <!-- Nostrils -->
+                        <ellipse cx="88" cy="112" rx="4" ry="6" fill="#382A29"/>
+                        <ellipse cx="112" cy="112" rx="4" ry="6" fill="#382A29"/>
+                        <!-- Eyes (Super Happy Arc) -->
+                        <g id="capyEyes">
+                            <path d="M 68 95 Q 78 88 88 95" stroke="#382A29" stroke-width="5" stroke-linecap="round" fill="none"/>
+                            <path d="M 112 95 Q 122 88 132 95" stroke="#382A29" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        </g>
+                        <!-- Mouth -->
+                        <path id="capyMouth" d="M 94 124 Q 100 129 106 124" stroke="#382A29" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <!-- Cheeks -->
+                        <circle cx="62" cy="115" r="9" fill="#FF5E7E" opacity="0.45"/>
+                        <circle cx="138" cy="115" r="9" fill="#FF5E7E" opacity="0.45"/>
+                        <!-- Orange on Head (Mandarin Capybara Style) -->
+                        <circle cx="100" cy="52" r="18" fill="#FFA500" stroke="#382A29" stroke-width="4"/>
+                        <path d="M 100 34 Q 106 28 108 34" stroke="#2E7D32" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <circle cx="100" cy="52" r="4" fill="#FFC107" opacity="0.6"/>
+                    </svg>
+                </div>
+
+                <button onclick="tapCapybara()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pastelYellow hover:bg-amber-200 border-2 border-amber-400 text-amber-900 font-bold text-xs sm:text-sm shadow-md active:scale-90 transition-all">
+                    <span>🍊 Pencet Capybara Penenang Stres</span>
+                    <span id="capyPencetBadge" class="bg-white text-amber-800 px-2 py-0.5 rounded-full border border-amber-300 text-xs">0x</span>
+                </button>
+
+                <!-- Titles & Identifiers -->
+                <div class="space-y-1 pt-2">
+                    <span class="inline-block bg-pastelPink text-cuteRose text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                        ⚡ Official Energy Booster
+                    </span>
+                    <h2 class="font-fredoka text-2xl sm:text-4xl font-bold text-cuteRose tracking-wide leading-tight">
+                        Pusat Semangat & Anti-Mager Nugas Mutia! 🎀
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-600 font-bold max-w-lg mx-auto">
+                        Website khusus pembasmi pusing, pelenyap mager, dan pembawa senyuman buat putri tercantik!
+                    </p>
+                </div>
+
+                <!-- Credential Badges -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+                    <div class="bg-white/90 border-2 border-pastelPinkDark rounded-2xl px-4 py-2 text-center shadow-sm w-full sm:w-auto">
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-wider">Target Semangat Utami 🌸</p>
+                        <p class="font-fredoka text-sm font-bold text-gray-800">Mutia Alvha Rahmasari</p>
+                        <span class="inline-block bg-pastelPink/70 text-cuteRose text-[11px] font-extrabold px-2 py-0.5 rounded-md mt-0.5">NIM: 1257050127</span>
+                    </div>
+
+                    <span class="text-2xl text-cuteRose hidden sm:block animate-pulse-heart">💖</span>
+
+                    <div class="bg-white/90 border-2 border-pastelPurple rounded-2xl px-4 py-2 text-center shadow-sm w-full sm:w-auto">
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-wider">Official Support System 🚀</p>
+                        <p class="font-fredoka text-sm font-bold text-gray-800">Rifqi Bilal Afriza</p>
+                        <span class="inline-block bg-pastelPurple/70 text-cutePurple text-[11px] font-extrabold px-2 py-0.5 rounded-md mt-0.5">NIM: 1247050125</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 2. THE UNCLICKABLE "GAK MAU NUGAS" RUNAWAY BUTTON -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 space-y-6 relative">
+            <div class="text-center space-y-1">
+                <span class="inline-block bg-pastelOrange px-3 py-1 rounded-full text-xs font-bold text-orange-800 border border-orange-300">
+                    🎮 Game Anti-Nyerah
+                </span>
+                <h3 class="font-fredoka text-xl sm:text-2xl font-bold text-gray-800">
+                    Mutia Mau Nugas Gak Hari Ini? 🤔
+                </h3>
+                <p class="text-xs text-gray-500 font-bold">Pilih jawabanmu secara jujur di bawah ini ya!</p>
+            </div>
+
+            <!-- Interactive Arena -->
+            <div id="magerArena" class="relative min-h-[170px] sm:min-h-[190px] bg-white/70 rounded-3xl border-3 border-dashed border-pastelPinkDark p-4 flex flex-col sm:flex-row items-center justify-center gap-4 overflow-hidden">
+                
+                <!-- SEMANGAT DONG BUTTON -->
+                <button onclick="triggerGaspolSuccess()" class="z-10 w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 hover:from-emerald-500 hover:to-teal-600 text-white font-fredoka font-bold text-base shadow-lg shadow-emerald-200 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <span class="text-2xl">🚀</span>
+                    <span>SEMANGAT DONG! GASPOL!</span>
+                </button>
+
+                <!-- RUNAWAY / GAK MAU BUTTON -->
+                <button id="runawayBtn" 
+                        onmouseenter="dodgeButton()" 
+                        onclick="dodgeButton()" 
+                        ontouchstart="dodgeButton(event)"
+                        class="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-400 to-pink-500 text-white font-fredoka font-bold text-sm shadow-md flex items-center justify-center gap-1.5 whitespace-nowrap z-20 cursor-pointer">
+                    <span id="runawayIcon">🙈</span>
+                    <span id="runawayText">Gak Mau, Mau Nyerah</span>
+                </button>
+
+            </div>
+
+            <p id="magerHint" class="text-[11px] text-center font-bold text-gray-400 italic">
+                *Ssstt... Tombol merah itu menolak semua rasa pantang menyerahmu! Wkwkwk 🤪
+            </p>
+        </section>
+
+
+        <!-- 3. KALKULATOR LEVEL MAGER & STRES TUGAS MUTIA -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="text-center space-y-1">
+                <span class="inline-block bg-pastelMint px-3 py-1 rounded-full text-xs font-bold text-teal-800 border border-teal-300">
+                    📊 Indikator Real-Time
+                </span>
+                <h3 class="font-fredoka text-xl sm:text-2xl font-bold text-gray-800">
+                    Kalkulator Level Mager & Stres Mutia 🧮
+                </h3>
+                <p class="text-xs text-gray-500 font-bold">Geser slider di bawah ini sesuai kondisi kepala Mutia detik ini!</p>
+            </div>
+
+            <div class="bg-white/90 p-5 rounded-2xl border-2 border-pastelPinkDark space-y-5 shadow-sm">
+                
+                <!-- Range Input -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <span class="text-gray-600 flex items-center gap-1">
+                            <i class="fa-solid fa-gauge-high text-cuteRose"></i>
+                            <span>Level Mager:</span>
+                        </span>
+                        <span id="magerPercentText" class="font-fredoka text-lg font-bold text-cuteRose">50%</span>
+                    </div>
+
+                    <input type="range" id="magerSlider" min="0" max="100" value="50" oninput="updateMagerCalculator(this.value)">
+                    
+                    <div class="flex justify-between text-[10px] font-extrabold text-gray-400 px-1">
+                        <span>0% (Fresh)</span>
+                        <span>50% (Butuh Seblak)</span>
+                        <span>100% (GAWAT!)</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Status Output Card -->
+                <div id="magerStatusCard" class="bg-pastelYellow/80 p-4 rounded-2xl border-2 border-amber-300 text-center space-y-2 transition-all duration-300">
+                    <span id="magerEmoji" class="text-4xl inline-block animate-bounce-gentle">🍵</span>
+                    <h4 id="magerTitle" class="font-fredoka text-base font-bold text-amber-900">
+                        Level 50%: Butuh Asupan Seblak / Matcha
+                    </h4>
+                    <p id="magerDesc" class="text-xs text-amber-800 font-semibold leading-relaxed">
+                        "Setengah perjalanan! Otak masih nyala tapi lidah udah minta dikasih yang pedas-pedas gurih!"
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. KUIS DIAGNOSTIK NUGAS KOCAK -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 space-y-5">
+            <div class="text-center space-y-1">
+                <span class="inline-block bg-pastelPurple px-3 py-1 rounded-full text-xs font-bold text-purple-900 border border-purple-300">
+                    🧩 Kuis Diagnostik Nugas
+                </span>
+                <h3 class="font-fredoka text-xl sm:text-2xl font-bold text-gray-800">
+                    Siapa Penyemangat Nugas Nomor 1 Mutia? 🧐
+                </h3>
+                <p class="text-xs text-gray-500 font-bold">Pilih jawaban paling akurat dan paling jujur di bawah ini!</p>
+            </div>
+
+            <!-- Quiz Buttons Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <button onclick="answerQuiz('A')" class="glass-card-hover bg-white/90 p-4 rounded-2xl border-2 border-pastelPink border-b-4 hover:border-cuteRose text-left flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-pastelPink text-cuteRose font-fredoka font-bold flex items-center justify-center shrink-0">A</span>
+                    <span class="font-fredoka text-sm font-bold text-gray-800">Rifqi</span>
+                </button>
+
+                <button onclick="answerQuiz('B')" class="glass-card-hover bg-white/90 p-4 rounded-2xl border-2 border-pastelYellow border-b-4 hover:border-amber-400 text-left flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-pastelYellow text-amber-800 font-fredoka font-bold flex items-center justify-center shrink-0">B</span>
+                    <span class="font-fredoka text-sm font-bold text-gray-800">Bilal</span>
+                </button>
+
+                <button onclick="answerQuiz('C')" class="glass-card-hover bg-white/90 p-4 rounded-2xl border-2 border-pastelMint border-b-4 hover:border-teal-400 text-left flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-pastelMint text-teal-800 font-fredoka font-bold flex items-center justify-center shrink-0">C</span>
+                    <span class="font-fredoka text-sm font-bold text-gray-800">Afriza</span>
+                </button>
+
+                <button onclick="answerQuiz('D')" class="glass-card-hover bg-white/90 p-4 rounded-2xl border-2 border-pastelPurple border-b-4 hover:border-purple-400 text-left flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-pastelPurple text-purple-800 font-fredoka font-bold flex items-center justify-center shrink-0">D</span>
+                    <span class="font-fredoka text-sm font-bold text-gray-800">Cowok NIM 1247050125</span>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- 5. MESIN MOOD BOOSTER (VENDING MACHINE VIRTUAL) -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 space-y-5">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 border-b-2 border-pastelPink/60 pb-3">
+                <div>
+                    <h3 class="font-fredoka text-xl font-bold text-gray-800 flex items-center gap-2">
+                        <span>🎰</span> Vending Machine Mood Booster
+                    </h3>
+                    <p class="text-xs text-gray-500 font-bold">Pilih asupan kebahagiaan gratis khusus Mutia!</p>
+                </div>
+                <span class="text-xs text-cuteRose font-black bg-pastelPink/60 px-3 py-1 rounded-full">
+                    Kredit: 🎟️ UNLIMITED
+                </span>
+            </div>
+
+            <!-- Vending Items Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                
+                <button onclick="dispenseTreat('Kopi Anti-Ngantuk ☕', 'Matanya langsung cring 1000 watt! Siap babat habis bab 1-5!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-amber-200 border-b-4 hover:border-amber-400 flex items-center gap-3 text-left">
+                    <span class="text-3xl">☕</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Kopi Magic</p>
+                        <span class="text-[10px] text-amber-700 font-extrabold">Fokus +100%</span>
+                    </div>
+                </button>
+
+                <button onclick="dispenseTreat('Boba Kebahagiaan 🧋', 'Kadar gula manis melunturkan emosi jiwa akibat kodingan error!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-pink-200 border-b-4 hover:border-pink-400 flex items-center gap-3 text-left">
+                    <span class="text-3xl">🧋</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Boba Ceria</p>
+                        <span class="text-[10px] text-pink-700 font-extrabold">Senyum +100%</span>
+                    </div>
+                </button>
+
+                <button onclick="dispenseTreat('Seblak Pedas Gurih 🍲', 'Pedasnya pas! Pemantik ide-ide jenius pengerjaan tugas!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-rose-200 border-b-4 hover:border-rose-400 flex items-center gap-3 text-left">
+                    <span class="text-3xl">🍲</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Seblak Pedas</p>
+                        <span class="text-[10px] text-rose-700 font-extrabold">Semangat +100%</span>
+                    </div>
+                </button>
+
+                <button onclick="dispenseTreat('Elusan Kepala Virtual 💆‍♀️', 'Pat-pat-pat~ Pusingnya ditransfer dulu ke tempat lain!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-purple-200 border-b-4 hover:border-purple-400 flex items-center gap-3 text-left">
+                    <span class="text-3xl">💆‍♀️</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Elusan Kepala</p>
+                        <span class="text-[10px] text-purple-700 font-extrabold">Tenang +100%</span>
+                    </div>
+                </button>
+
+                <button onclick="dispenseTreat('Capybara Santuy 🦫', 'Tetap tenang dan santuy menyikapi deadline pengerjaan!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-amber-300 border-b-4 hover:border-amber-500 flex items-center gap-3 text-left">
+                    <span class="text-3xl">🦫</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Capy Santuy</p>
+                        <span class="text-[10px] text-amber-800 font-extrabold">Anti-Panik +100%</span>
+                    </div>
+                </button>
+
+                <button onclick="dispenseTreat('Semangat Kasih Sayang 💖', 'Rifqi siap sedia mendampingi Mutia sampai sarjana!')" class="glass-card-hover bg-white/80 p-3.5 rounded-2xl border-2 border-red-200 border-b-4 hover:border-red-400 flex items-center gap-3 text-left">
+                    <span class="text-3xl">💖</span>
+                    <div>
+                        <p class="font-fredoka text-xs sm:text-sm font-bold text-gray-800">Doa & Support</p>
+                        <span class="text-[10px] text-red-700 font-extrabold">Energi +1000%</span>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- Treat Dispense Output -->
+            <div id="treatDispenseBox" class="hidden bg-white/90 p-4 rounded-2xl border-2 border-dashed border-cuteRose text-center space-y-1 pop-in">
+                <span id="treatEmoji" class="text-3xl inline-block animate-bounce">🎁</span>
+                <h4 id="treatTitle" class="font-fredoka text-sm font-bold text-cuteRose"></h4>
+                <p id="treatDesc" class="text-xs text-gray-600 font-bold"></p>
+            </div>
+        </section>
+
+
+        <!-- 6. SERTIFIKAT MAHASISWI TER-PALING GEMES -->
+        <section class="glass-cute rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="text-center space-y-1">
+                <span class="inline-block bg-pastelYellow px-3 py-1 rounded-full text-xs font-bold text-amber-900 border border-amber-300">
+                    📜 Penghargaan Resmi
+                </span>
+                <h3 class="font-fredoka text-xl sm:text-2xl font-bold text-gray-800">
+                    Sertifikat Kelulusan Nugas Tanpa Stres 🎓
+                </h3>
+            </div>
+
+            <!-- Certificate Frame -->
+            <div class="relative bg-gradient-to-b from-amber-50 to-orange-50 border-8 border-double border-amber-300 rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-inner overflow-hidden">
+                
+                <!-- Corner Ribbons -->
+                <div class="absolute top-2 left-2 text-xl">🎀</div>
+                <div class="absolute top-2 right-2 text-xl">🎀</div>
+                <div class="absolute bottom-2 left-2 text-xl">🌸</div>
+                <div class="absolute bottom-2 right-2 text-xl">🌸</div>
+
+                <div class="space-y-1">
+                    <p class="text-[10px] tracking-widest uppercase font-black text-amber-800">Diberikan Kepada Mahasiswi Terbaik:</p>
+                    <h4 class="font-fredoka text-2xl sm:text-3xl font-bold text-cuteRose underline decoration-wavy decoration-pink-300">
+                        Mutia Alvha Rahmasari
+                    </h4>
+                    <p class="font-mono text-xs font-bold text-amber-900">NIM: 1257050127</p>
+                </div>
+
+                <p class="text-xs sm:text-sm text-gray-700 font-semibold max-w-md mx-auto leading-relaxed">
+                    "Atas ketangguhan luar biasa, keimutan tanpa batas, dan kerja keras pantang menyerah dalam menyelesaikan tugas perkuliahan walau sering pusing dan pengen rebahan."
+                </p>
+
+                <!-- Stamp Target Overlay -->
+                <div class="relative min-h-[80px] flex items-center justify-center">
+                    <div id="certStamp" class="hidden opacity-0 z-20">
+                        <div class="border-4 border-dashed border-cuteRose rounded-full px-6 py-3 bg-white/90 shadow-xl transform -rotate-12">
+                            <p class="font-fredoka text-xs text-cuteRose font-bold">VERIFIED SUPER GEMES</p>
+                            <p class="font-fredoka text-lg font-black text-cuteRose leading-none">LULUS NUGAS 100%</p>
+                            <p class="text-[9px] text-gray-400 font-bold">STAMPED BY RIFQI BILAL</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signatures -->
+                <div class="flex items-end justify-between pt-4 border-t border-amber-200/80 text-left text-[11px]">
+                    <div>
+                        <p class="text-gray-400 font-bold">Tanggal Terbit:</p>
+                        <p class="font-bold text-gray-700">Hari Ini & Selamanya ✨</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-gray-400 font-bold">Official Chief Energy Officer:</p>
+                        <p class="font-fredoka text-xs font-bold text-cutePurple">Rifqi Bilal Afriza (1247050125)</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Claim Button -->
+            <div class="text-center">
+                <button id="stampClaimBtn" onclick="claimStamp()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-all inline-flex items-center gap-2">
+                    <i class="fa-solid fa-stamp text-xl"></i>
+                    <span>Klaim Stempel Kelulusan Resmi! 💮</span>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="text-center pt-4 space-y-2 text-xs text-gray-500 font-bold">
+            <p class="flex items-center justify-center gap-1">
+                <span>Dibuat dengan kadar cinta & humor 1000%</span>
+                <span class="text-cuteRose animate-pulse">💖</span>
+            </p>
+            <p class="text-[10px] text-gray-400">
+                Mutia Alvha Rahmasari (1257050127) ❤️ Rifqi Bilal Afriza (1247050125)
+            </p>
+        </footer>
+
+    </main>
+
+
+    <!-- QUIZ SUCCESS MODAL -->
+    <div id="quizModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-cute bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 transform scale-90 transition-transform duration-300 pop-in relative">
+            <span class="text-5xl inline-block animate-bounce">🎉</span>
+            
+            <div class="space-y-2">
+                <span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase">
+                    SKOR: 1000/1000
+                </span>
+                <h3 class="font-fredoka text-xl font-bold text-cuteRose">
+                    JAWABAN ANDA 1000% BENAR! 🎯
+                </h3>
+                <p class="text-xs text-gray-600 font-bold leading-relaxed">
+                    Selamat, Mutia! Anda berhak mendapatkan pasokan semangat tiada henti, kawan cerita, dan pelindung rasa stres dari Rifqi Bilal Afriza! 🥰✨
+                </p>
+            </div>
+
+            <button onclick="closeQuizModal()" class="w-full py-3 rounded-2xl bg-cuteRose hover:bg-pink-600 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-all">
+                Makasih Rifqi! Siap Nugas! 🚀
+            </button>
+        </div>
+    </div>
+
+
+    <!-- GASPOL SUCCESS MODAL -->
+    <div id="gaspolModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-cute bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 transform scale-90 transition-transform duration-300 pop-in relative">
+            <span class="text-5xl inline-block animate-bounce">🏆</span>
+            
+            <div class="space-y-2">
+                <h3 class="font-fredoka text-2xl font-bold text-cuteRose">
+                    Luar Biasa, Mutia! 🏆
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-600 font-bold leading-relaxed">
+                    Keputusan mahasiswi paling jenius dan pemberani! Rifqi bangga banget sama kamu hari ini! 💪✨
+                </p>
+            </div>
+
+            <div class="bg-pastelYellow p-3 rounded-2xl text-xs text-amber-900 font-bold border border-amber-300">
+                "Kerjakan tugasmu sekarang, bersenang-senanglah kemudian!" 💻
+            </div>
+
+            <button onclick="closeGaspolModal()" class="w-full py-3 rounded-2xl bg-cuteRose hover:bg-pink-600 text-white font-fredoka font-bold text-sm shadow-md active:scale-95 transition-all">
+                Gaskeun Buka Laptop Sekarang! 💻
+            </button>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC & AUDIO SYNTH -->
+    <script>
+        /* --- STATE VARIABLES --- */
+        let isAudioMuted = false;
+        let audioCtx = null;
+        let capyPencetCount = 0;
+        let dodgeCount = 0;
+
+        // Runaway Button Texts
+        const runawayTexts = [
+            "Eits, capybara melarang nyerah! 🦫",
+            "Gak bisa diklik woi! 😜",
+            "Tugasnya kangen tuh! 📚",
+            "Kabuuuur 💨",
+            "Tetap gak bisa! Wkwkwk 🤪",
+            "Rifqi mengawasi! 👁️👄👁️",
+            "Coba lagi kalau bisa! 🙈",
+            "Tombol ini terkunci rasa semangat! 🔒"
+        ];
+
+        /* --- WEB AUDIO SYNTHESIZER --- */
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function toggleAudioMute() {
+            isAudioMuted = !isAudioMuted;
+            const icon = document.getElementById('soundIcon');
+            const label = document.getElementById('soundLabel');
+            
+            if (isAudioMuted) {
+                icon.className = 'fa-solid fa-volume-xmark';
+                label.innerText = 'Efek MUTE';
+            } else {
+                icon.className = 'fa-solid fa-volume-high';
+                label.innerText = 'Efek Suara ON';
+                playPopSound();
+            }
+        }
+
+        function playPopSound(pitch = 1) {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450 * pitch, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880 * pitch, ctx.currentTime + 0.08);
+
+                gain.gain.setValueAtTime(0.18, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.09);
+            } catch(e) {}
+        }
+
+        function playBoingSound() {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(200, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.16);
+            } catch(e) {}
+        }
+
+        function playFanfare() {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+
+                    const startTime = ctx.currentTime + (i * 0.08);
+                    gain.gain.setValueAtTime(0.15, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.26);
+                });
+            } catch(e) {}
+        }
+
+        function playStampSound() {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(120, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.12);
+
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.13);
+            } catch(e) {}
+        }
+
+        /* --- CAPYBARA MASCOT INTERACTION --- */
+        function tapCapybara() {
+            capyPencetCount++;
+            document.getElementById('capyPencetBadge').innerText = `${capyPencetCount}x`;
+
+            playPopSound(1.2);
+
+            const mouth = document.getElementById('capyMouth');
+            mouth.setAttribute('d', 'M 92 122 Q 100 134 108 122');
+
+            const bubble = document.getElementById('capyBubble');
+            bubble.style.opacity = '1';
+            bubble.style.transform = 'translate(-50%, -8px)';
+
+            spawnFloatingEmoji('🍊');
+
+            setTimeout(() => {
+                mouth.setAttribute('d', 'M 94 124 Q 100 129 106 124');
+                bubble.style.opacity = '0';
+                bubble.style.transform = 'translate(-50%, 0)';
+            }, 1200);
+        }
+
+        /* --- RUNAWAY BUTTON DODGE LOGIC --- */
+        function dodgeButton(event) {
+            if (event) event.preventDefault();
+
+            dodgeCount++;
+            playBoingSound();
+
+            const btn = document.getElementById('runawayBtn');
+            const arena = document.getElementById('magerArena');
+            const textElem = document.getElementById('runawayText');
+
+            const arenaRect = arena.getBoundingClientRect();
+            const btnRect = btn.getBoundingClientRect();
+
+            const maxX = arenaRect.width - btnRect.width - 20;
+            const maxY = arenaRect.height - btnRect.height - 20;
+
+            const newX = Math.max(10, Math.floor(Math.random() * maxX));
+            const newY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            btn.style.position = 'absolute';
+            btn.style.left = `${newX}px`;
+            btn.style.top = `${newY}px`;
+
+            textElem.innerText = runawayTexts[dodgeCount % runawayTexts.length];
+            spawnFloatingEmoji('🏃‍♀️');
+        }
+
+        /* --- GASPOL BUTTON SUCCESS --- */
+        function triggerGaspolSuccess() {
+            playFanfare();
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#FF5E7E', '#FFD1DC', '#FFE599', '#C1E7E3']
+                });
+            }
+
+            const modal = document.getElementById('gaspolModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeGaspolModal() {
+            const modal = document.getElementById('gaspolModal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        /* --- KALKULATOR MAGER LOGIC --- */
+        function updateMagerCalculator(val) {
+            const percentText = document.getElementById('magerPercentText');
+            const emoji = document.getElementById('magerEmoji');
+            const title = document.getElementById('magerTitle');
+            const desc = document.getElementById('magerDesc');
+            const card = document.getElementById('magerStatusCard');
+
+            percentText.innerText = `${val}%`;
+
+            if (val < 20) {
+                emoji.innerText = "🧋";
+                title.innerText = `Level ${val}%: Masih Seger Kayak Boba Dingin`;
+                desc.innerText = `"Tenaga Mutia lagi di puncak kejayaan! Siap menaklukkan semua tugas hari ini!"`;
+                card.className = "bg-emerald-100/90 p-4 rounded-2xl border-2 border-emerald-300 text-center space-y-2 transition-all";
+            } else if (val < 45) {
+                emoji.innerText = "😌";
+                title.innerText = `Level ${val}%: Pusing Dikit Tapi Masih Manis`;
+                desc.innerText = `"Agak berat sih, tapi senyuman Mutia masih sanggup melunturkan beban tugas!"`;
+                card.className = "bg-sky-100/90 p-4 rounded-2xl border-2 border-sky-300 text-center space-y-2 transition-all";
+            } else if (val < 70) {
+                emoji.innerText = "🍵";
+                title.innerText = `Level ${val}%: Butuh Asupan Seblak / Matcha`;
+                desc.innerText = `"Otak mulai butuh asupan makanan enak biar ide-ide jenius pengerjaan keluar!"`;
+                card.className = "bg-amber-100/90 p-4 rounded-2xl border-2 border-amber-300 text-center space-y-2 transition-all";
+            } else if (val < 90) {
+                emoji.innerText = "🤖";
+                title.innerText = `Level ${val}%: Otak 404 Not Found`;
+                desc.innerText = `"Sistem kepalamu perlu di-reboot dan disemangatin sama Rifqi secara intensif!"`;
+                card.className = "bg-purple-100/90 p-4 rounded-2xl border-2 border-purple-300 text-center space-y-2 transition-all";
+            } else {
+                emoji.innerText = "🍜";
+                title.innerText = `Level ${val}%: MODE GAWAT DARURAT!`;
+                desc.innerText = `"Mutia butuh rehat + peluk virtual + disuapin mie goreng hangat dari Rifqi!"`;
+                card.className = "bg-rose-100/90 p-4 rounded-2xl border-2 border-rose-400 text-center space-y-2 transition-all";
+            }
+        }
+
+        /* --- KUIS DIAGNOSTIK LOGIC --- */
+        function answerQuiz(option) {
+            playFanfare();
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+
+            const modal = document.getElementById('quizModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeQuizModal() {
+            const modal = document.getElementById('quizModal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        /* --- VENDING MACHINE TREAT DISPENSER --- */
+        function dispenseTreat(name, descMsg) {
+            playPopSound(1.3);
+
+            const box = document.getElementById('treatDispenseBox');
+            const emojiElem = document.getElementById('treatEmoji');
+            const titleElem = document.getElementById('treatTitle');
+            const descElem = document.getElementById('treatDesc');
+
+            const emoji = name.split(' ').pop() || '🎁';
+
+            emojiElem.innerText = emoji;
+            titleElem.innerText = `Berhasil Mengeluarkan: ${name}!`;
+            descElem.innerText = `"${descMsg}"`;
+
+            box.classList.remove('hidden');
+            spawnFloatingEmoji(emoji);
+        }
+
+        /* --- CERTIFICATE STAMP CLAIM --- */
+        function claimStamp() {
+            playStampSound();
+            playFanfare();
+
+            const stamp = document.getElementById('certStamp');
+            stamp.classList.remove('hidden', 'opacity-0');
+            stamp.classList.add('animate-stamp');
+
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 150,
+                    spread: 100,
+                    origin: { y: 0.8 },
+                    colors: ['#FF5E7E', '#FFC107', '#8B5CF6']
+                });
+            }
+
+            const btn = document.getElementById('stampClaimBtn');
+            btn.innerHTML = `<i class="fa-solid fa-check-circle"></i><span>TELAH DITEMPEL DENGAN SAH! ✨</span>`;
+            btn.disabled = true;
+            btn.className = "px-6 py-3.5 rounded-2xl bg-emerald-500 text-white font-fredoka font-bold text-sm shadow-md cursor-default inline-flex items-center gap-2";
+        }
+
+        /* --- FLOATING EMOJI ANIMATION --- */
+        function spawnFloatingEmoji(emojiSymbol) {
+            const el = document.createElement('div');
+            el.innerText = emojiSymbol;
+            el.className = 'fixed z-50 pointer-events-none text-3xl font-bold transition-all duration-1000 ease-out';
+            
+            const startX = window.innerWidth / 2 + (Math.random() - 0.5) * 220;
+            const startY = window.innerHeight / 2 + (Math.random() - 0.5) * 120;
+
+            el.style.left = `${startX}px`;
+            el.style.top = `${startY}px`;
+            el.style.opacity = '1';
+            el.style.transform = 'scale(0.5)';
+
+            document.body.appendChild(el);
+
+            requestAnimationFrame(() => {
+                el.style.top = `${startY - 140}px`;
+                el.style.opacity = '0';
+                el.style.transform = 'scale(1.6) rotate(' + ((Math.random() - 0.5) * 50) + 'deg)';
+            });
+
+            setTimeout(() => el.remove(), 1050);
+        }
+
+        /* --- BACKGROUND PARTICLES --- */
+        let particles = [];
+        let pCanvas, pCtx;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            pCanvas = document.getElementById('particleCanvas');
+            pCtx = pCanvas.getContext('2d');
+            resizepCanvas();
+
+            window.addEventListener('resize', resizepCanvas);
+
+            for (let i = 0; i < 30; i++) {
+                particles.push({
+                    x: Math.random() * pCanvas.width,
+                    y: Math.random() * pCanvas.height,
+                    radius: Math.random() * 3.5 + 1,
+                    color: ['#FFB7C5', '#FFE599', '#C1E7E3', '#E8DFF5'][Math.floor(Math.random() * 4)],
+                    speedY: -(Math.random() * 0.35 + 0.15),
+                    speedX: (Math.random() - 0.5) * 0.25
+                });
+            }
+            animateParticles();
+        });
+
+        function resizepCanvas() {
+            if (!pCanvas) return;
+            pCanvas.width = window.innerWidth;
+            pCanvas.height = window.innerHeight;
+        }
+
+        function animateParticles() {
+            pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+
+                if (p.y < 0) {
+                    p.y = pCanvas.height;
+                    p.x = Math.random() * pCanvas.width;
+                }
+
+                pCtx.beginPath();
+                pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                pCtx.fillStyle = p.color;
+                pCtx.globalAlpha = 0.65;
+                pCtx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+    </script>
+</body>
+</html>
